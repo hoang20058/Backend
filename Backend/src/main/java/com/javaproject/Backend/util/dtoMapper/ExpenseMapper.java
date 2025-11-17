@@ -1,6 +1,7 @@
 package com.javaproject.Backend.util.dtoMapper;
 
 import com.javaproject.Backend.domain.Expense;
+import com.javaproject.Backend.dto.request.ExpenseRequest;
 import com.javaproject.Backend.dto.response.ExpenseResponse;
 
 public class ExpenseMapper {
@@ -21,4 +22,26 @@ public class ExpenseMapper {
 
         return dto;                                   // Trả DTO
     }
+    /**
+     * Map từ DTO ExpenseRequest → entity Expense
+     * Lưu ý: User và Category set ở Service sau khi tìm từ repository
+     */
+    public static Expense toEntity(ExpenseRequest request) {
+        Expense expense = new Expense();
+        expense.setAmount(request.getAmount());
+        expense.setDescription(request.getDescription());
+        expense.setExpenseDate(request.getExpenseDate());
+        return expense;
+    }
+
+    /**
+     * Cập nhật entity Expense từ ExpenseRequest
+     * Dùng cho update
+     */
+    public static void updateFromRequest(Expense expense, ExpenseRequest request) {
+        expense.setAmount(request.getAmount());
+        expense.setDescription(request.getDescription());
+        expense.setExpenseDate(request.getExpenseDate());
+    }
+
 }

@@ -9,6 +9,10 @@ public class RegisterResponse {
     private String fullName;
     private String message = "User registered successfully";
 
+    public RegisterResponse(){
+        
+    }
+
     public RegisterResponse(Long userId, String email, String fullName) {
         this.userId = userId;
         this.email = email;

@@ -1,6 +1,7 @@
 package com.javaproject.Backend.util.dtoMapper;
 
 import com.javaproject.Backend.domain.Budget;
+import com.javaproject.Backend.dto.request.BudgetRequest;
 import com.javaproject.Backend.dto.response.BudgetResponse;
 
 public class BudgetMapper {
@@ -18,6 +19,27 @@ public class BudgetMapper {
         dto.setEndDate(b.getEndDate());               // Ngày kết thúc
 
         return dto;                                   // Trả DTO
+    }
+    /**
+     * DTO → Entity
+     */
+    public static Budget toEntity(BudgetRequest request) {
+        Budget budget = new Budget();
+        budget.setAmountLimit(request.getAmountLimit());
+        budget.setPeriod(request.getPeriod());
+        budget.setStartDate(request.getStartDate());
+        budget.setEndDate(request.getEndDate());
+        return budget;
+    }
+
+    /**
+     * Cập nhật entity từ request
+     */
+    public static void updateFromRequest(Budget budget, BudgetRequest request) {
+        budget.setAmountLimit(request.getAmountLimit());
+        budget.setPeriod(request.getPeriod());
+        budget.setStartDate(request.getStartDate());
+        budget.setEndDate(request.getEndDate());
     }
 }
 

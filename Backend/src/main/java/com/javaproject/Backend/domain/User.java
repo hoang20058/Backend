@@ -22,7 +22,7 @@ public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "user_id")
+    @Column(name = "user_id", nullable = false)
     private Long userId;
 
     @Column(name = "email", nullable = false, unique = true, length = 255)
@@ -38,7 +38,11 @@ public class User {
     private LocalDateTime createdAt = LocalDateTime.now();
 
     // ===== Relationships =====
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+ 
+    @OneToMany(mappedBy = "user", //xác định thuộc tính liên kết hay FK
+        cascade = CascadeType.ALL, // toàn bộ thao tác với user sẽ tác động đến những bảng liên quan - tự động
+        orphanRemoval = true // xóa con trỏ khi dữ liệu bị xóa
+    )
     private List<Category> categories = new ArrayList<>();
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
@@ -112,8 +116,8 @@ public class User {
 
     // ===== Helper methods =====
     public void addCategory(Category category) {
-        categories.add(category);
-        category.setUser(this);
+        categories.add(category); // thêm vào danh sách trong User
+        category.setUser(this); // thiết lập quan hệ ở phía Category
     }
 
     public void removeCategory(Category category) {
